@@ -1,9 +1,35 @@
 #![allow(unused_variables)]
 
+use std::{
+    fmt::Display,
+    fmt::{self, Formatter},
+};
+
 #[derive(Debug, PartialEq)]
 enum FileState {
     Open,
     Closed,
+}
+
+impl Display for FileState {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        match self {
+            FileState::Open => write!(f, "Open"),
+            FileState::Closed => write!(f, "Closed"),
+        }
+    }
+}
+
+impl Display for File {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(
+            f,
+            "File {{ name: {}, data: {}, state: {} }}",
+            self.name,
+            self.data.len(),
+            self.state
+        )
+    }
 }
 
 #[derive(Debug)]
